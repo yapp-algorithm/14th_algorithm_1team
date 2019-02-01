@@ -16,7 +16,7 @@ public class BubbleSort{
 					arr[j] = arr[j+1];
 					arr[j+1] = temp;
 				}
-				RandomArrayUtils.arrayPrint(builder.append("> ").append(-(i-SIZE)).append("-").append(j+1).toString(), arr);
+				RandomArrayUtils.arrayPrint(builder.append("> ").append(-(i-size)).append("-").append(j+1).toString(), arr);
 				count++;
 			}
 			System.out.println("\n");
