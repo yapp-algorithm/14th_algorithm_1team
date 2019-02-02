@@ -17,6 +17,8 @@ public class SelectionSort {
 		for(int i=0; i< size-1; i++){
 			StringBuilder builder = new StringBuilder();
 			min = i;
+			System.out.printf("> 현재 최소 값 : %d\n" , arr[min]);
+			
 			for(int j=i+1; j<size; j++){
 				if(arr[j] < arr[min]) min = j;
 			}
