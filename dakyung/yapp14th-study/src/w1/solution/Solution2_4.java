@@ -1,6 +1,14 @@
+/*
+ * 문제 : 프로그래머스 정렬 level2 - 가장 큰 수
+ * 출처 : https://programmers.co.kr/learn/courses/30/parts/12198
+ *
+ * 작성일 : 2019.2.15
+ * 작성자 : 고다경
+ *
+ * Comparator
+ */
 package w1.solution;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,7 +23,7 @@ public class Solution2_4 {
     }
 
     public static String solution(int[] numbers) {
-        List<String> list = new ArrayList();
+        List<String> list = new ArrayList<>();
         for(int i : numbers) list.add(Integer.toString(i));
 
         list.sort((a, b) -> {
