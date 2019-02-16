@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - BubbleSort",
+            "request": "launch",
+            "mainClass": "BubbleSort",
+            "projectName": "14th_algorithm_1team-1_dbc544e7"
+        }
+    ]
+}
