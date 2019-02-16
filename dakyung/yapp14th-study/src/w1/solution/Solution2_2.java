@@ -12,11 +12,11 @@ package w1.solution;
 
 public class Solution2_2{
 
-//	private static final int[] NUMBERS = new int[]{3, 30, 34, 5, 9};
+	private static final int[] NUMBERS = new int[]{3, 30, 34, 5, 9};
 //	private static final int[] NUMBERS = new int[]{0, 0, 0};
 //	private static final int[] NUMBERS = new int[]{12,121}; // 12121
 //	private static final int[] NUMBERS = new int[]{21, 212}; // 21221
-	private static final int[] NUMBERS = new int[]{0,0,70}; 
+//	private static final int[] NUMBERS = new int[]{0,0,70}; 
 	
 	public static void main(String[] args) {
 		System.out.println(solution(NUMBERS));

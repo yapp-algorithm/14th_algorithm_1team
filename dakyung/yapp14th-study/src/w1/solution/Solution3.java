@@ -12,8 +12,11 @@ package w1.solution;
 
 public class Solution3 {
 	
-	private static final int[] CITATIONS = new int[]{3, 0, 6, 1, 5};
+//	private static final int[] CITATIONS = new int[]{3, 0, 6, 1, 5};
 //	private static final int[] CITATIONS = new int[]{0,0,0};
+//	private static final int[] CITATIONS = new int[]{1000,1};
+//	private static final int[] CITATIONS = new int[]{25, 8, 5, 3, 3};
+	private static final int[] CITATIONS = new int[]{10,8,5,4,3};
 	
 	public static void main(String[] args) {
 		System.out.println(solution(CITATIONS));
@@ -23,9 +26,9 @@ public class Solution3 {
 		int answer = 0;
         
         citations = sort(citations);
-
+        
         for(int i=0; i<citations.length; i++){
-        	if(citations[i] > i) answer++; 
+        		if(citations[i] > i) answer++; 
         }
        
         return answer;
