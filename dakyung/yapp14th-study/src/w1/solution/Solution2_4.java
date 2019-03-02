@@ -26,9 +26,7 @@ public class Solution2_4 {
         List<String> list = new ArrayList<>();
         for(int i : numbers) list.add(Integer.toString(i));
 
-        list.sort((a, b) -> {
-            return -Integer.compare(Integer.parseInt(a + b), Integer.parseInt(b + a));
-        });
+        list.sort((a, b) ->  -Integer.compare(Integer.parseInt(a + b), Integer.parseInt(b + a)));
 
         if(list.get(0).charAt(0) == '0') return "0";
 
