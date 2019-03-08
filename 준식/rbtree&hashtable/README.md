@@ -8,6 +8,19 @@
 >- 4. 모든 leaf node에서 Black Depth는 같음(leaf node에서 root node까지 가는 경로에서 만나는 black node의 개수는 같다)
 
 
+> RB-Tree는 항상 Double Red를 피해야함
+
+> Restructing
+>- 나(z)와 내 부모(v), 내 부모의 부모(gp)를 오름차순으로 정렬
+>- 무조건 가운데 있는 값을 부모로 만들고 나머지 둘을 자식으로 만듬
+>- 올라간 가운데 있는 값을 Black으로 만들고 나머지 두 자식을 Red로 만듬
+>- Restructing은 다른 서브트리에 영향(Black Depth)을 끼치지 않아서 한번의 Restructing이면 끝남
+
+> Recoloring
+>- 현재 insert된 노드(z)의 부모(v)와 그 형제(w)를 Black으로 하고 gp는 Red로 함
+>- gp가 root node가 아니었을 시 Double Red가 다시 발생 가능
+>- 한번에 안끝날 가능성이 있음
+
 > https://zeddios.tistory.com/237
 > https://hamait.tistory.com/412
 
