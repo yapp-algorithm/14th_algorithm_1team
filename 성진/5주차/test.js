@@ -105,17 +105,24 @@ class Graph {
         
     }
 
-    BFS() {
+    BFS(vertex) {
         let queue = new Queue();
         let checkNode = this.root;
+        let target;
         while(1) {
             checkNode.visit = false;
+            if (checkNode.vertex === vertex) target = checkNode;
             if (checkNode.next === null) break;
             checkNode = checkNode.next;
         }
 
-        queue.enqueue(this.root);
-        this.root.visit = true;
+        if (target === undefined) {
+            console.log('Input data does not exist');
+            return;
+        }
+
+        queue.enqueue(target);
+        target.visit = true;
         
         while(1) {
             let nowNode = queue.dequeue();
@@ -132,23 +139,49 @@ class Graph {
             if (queue.getValue().length === 0) break;
         }
     }
+
+    DFS(vertex) {
+        let checkNode = this.root;
+        let target;
+
+        while(1) {
+            checkNode.visit = false;
+            if (checkNode.vertex === vertex) target = checkNode;
+            if (checkNode.next === null) break;
+            checkNode = checkNode.next;
+        }
+
+        if (target === undefined) {
+            console.log('Input data does not exist');
+            return;
+        }
+
+        target.visit = true;
+
+        this.DFS_search(target);        
+    }
+
+    DFS_search(target) {
+        target.adj.forEach(val => {
+            if(!val.visit) {
+                val.visit = true;
+
+                console.log(`${target.vertex} -> ${val.vertex}`);
+                this.DFS_search(val);
+            }
+        });
+    }
 }
 
-let BFSgraph = new Graph();
+let graph = new Graph();
 
-BFSgraph.insert(0, 1);
-BFSgraph.insert(0, 2);
-BFSgraph.insert(0, 4);
-BFSgraph.insert(1, 0);
-BFSgraph.insert(1, 2);
-BFSgraph.insert(2, 0);
-BFSgraph.insert(2, 1);
-BFSgraph.insert(2, 3);
-BFSgraph.insert(2, 4);
-BFSgraph.insert(3, 2);
-BFSgraph.insert(3, 4);
-BFSgraph.insert(4, 0);
-BFSgraph.insert(4, 2);
-BFSgraph.insert(4, 3);
+graph.insert(0, 1);
+graph.insert(0, 2);
+graph.insert(0, 4);
+graph.insert(1, 2);
+graph.insert(2, 3);
+graph.insert(2, 4);
+graph.insert(3, 4);
 
-BFSgraph.BFS();
+graph.BFS(3);
+graph.DFS(3);
