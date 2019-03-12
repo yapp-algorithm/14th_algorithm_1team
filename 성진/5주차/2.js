@@ -43,7 +43,7 @@ class Graph {
     }
 
     insert(vertex, adj) {
-        if (vertex === null || vertex === undefined || vertex === '' || adj === null || adj === undefined || adj === '' || vertex === adj) {
+        if (vertex === null || vertex === undefined || vertex === '' || adj === null || adj === undefined || adj === '') {
             console.log('invaild input!');
             //둘중 한개라도 없거나 둘다 같은 값일 경우
             return;
@@ -63,7 +63,13 @@ class Graph {
             }
 
             if (checkNode.next === null) {
-                if (input !== undefined && target !== undefined) {
+
+                if (vertex === adj) {
+                    if (input === undefined) {
+                        let node = new Node(vertex);
+                        checkNode.next = node;
+                    }
+                } else if (input !== undefined && target !== undefined) {
                     let duplicateCheck = false;
                     input.adj.forEach(val => {
                         if (val.vertex === adj) duplicateCheck = true;
@@ -74,7 +80,6 @@ class Graph {
                     });
 
                     if (duplicateCheck) {
-                        console.log('already connected');
                         break;
                     }
 
@@ -93,8 +98,13 @@ class Graph {
                     node.adj.push(target);
                     target.adj.push(node);
                 } else {
-                    console.log('adj target is not exits');
-                    //입력 된 노드 2개 모두 없을 경우
+                    let node1 = new Node(vertex);
+                    let node2 = new Node(adj);
+                    checkNode.next = node1;
+                    checkNode.next = node2;
+
+                    node1.adj.push(node2);
+                    node2.adj.push(node1);
                 }
 
                 break;
@@ -105,24 +115,21 @@ class Graph {
         
     }
 
-    BFS(vertex) {
-        let queue = new Queue();
+    BFS_network_init() {
         let checkNode = this.root;
-        let target;
+
         while(1) {
             checkNode.visit = false;
-            if (checkNode.vertex === vertex) target = checkNode;
             if (checkNode.next === null) break;
             checkNode = checkNode.next;
         }
+    }
 
-        if (target === undefined) {
-            console.log('Input data does not exist');
-            return;
-        }
+    BFS_network_counting(node) {
+        let queue = new Queue();
 
-        queue.enqueue(target);
-        target.visit = true;
+        queue.enqueue(node);
+        node.visit = true;
         
         while(1) {
             let nowNode = queue.dequeue();
@@ -132,7 +139,7 @@ class Graph {
                     val.visit = true;
                     queue.enqueue(val);
 
-                    console.log(`${nowNode.vertex} -> ${val.vertex}`);
+                    // console.log(`${nowNode.vertex} -> ${val.vertex}`);
                 }
             });
 
@@ -140,48 +147,35 @@ class Graph {
         }
     }
 
-    DFS(vertex) {
-        let checkNode = this.root;
-        let target;
+    BFS_network() {
+        this.BFS_network_init();
+        let target = this.root;
+        let answer = 0;
 
-        while(1) {
-            checkNode.visit = false;
-            if (checkNode.vertex === vertex) target = checkNode;
-            if (checkNode.next === null) break;
-            checkNode = checkNode.next;
-        }
-
-        if (target === undefined) {
-            console.log('Input data does not exist');
-            return;
-        }
-
-        target.visit = true;
-
-        this.DFS_search(target);        
-    }
-
-    DFS_search(target) {
-        target.adj.forEach(val => {
-            if(!val.visit) {
-                val.visit = true;
-
-                console.log(`${target.vertex} -> ${val.vertex}`);
-                this.DFS_search(val);
+        while(target !== null) {
+            if (!target.visit) {
+                this.BFS_network_counting(target);
+                answer++;
             }
-        });
+            target = target.next;
+        }
+
+        return answer;
     }
 }
 
-let graph = new Graph();
+function solution(n, computers) {
+    let graph = new Graph();
 
-graph.insert(0, 1);
-graph.insert(0, 2);
-graph.insert(0, 4);
-graph.insert(1, 2);
-graph.insert(2, 3);
-graph.insert(2, 4);
-graph.insert(3, 4);
+    for (let i = 0; i < n; i++) {
+        computers[i].forEach((val, idx) => {
+            if (val === 1) {
+                graph.insert(i, idx);
+            }
+        });
+    }
 
-graph.BFS(3);
-graph.DFS(3);
+    return graph.BFS_network();
+}
+
+console.log(solution(3, [[1, 1, 0], [1, 1, 1], [0, 1, 1]]));
