@@ -179,3 +179,4 @@ function solution(n, computers) {
 }
 
 console.log(solution(3, [[1, 1, 0], [1, 1, 1], [0, 1, 1]]));
+//그래프로 만들고 그래프의 요소들을 돌면서 연결되어 있으면 visit은 true 가 되므로 전체 그래프를 돌면서 연결된 부위가 끝날 때 마다 카운트를 올리는 방식
